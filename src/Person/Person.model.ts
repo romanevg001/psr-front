@@ -1,7 +1,12 @@
-export default interface PersonModel {
+
+
+export interface PersonState {
+  id: number;
   name: string;
   age: number;
-  goPerson?(): void;
-    
-  
+}
+
+export interface PersonComponent extends PersonState {
+  goPerson(): void;
+  changed(): void;
 }

@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, {Component, SyntheticEvent} from 'react';
 import Person from './Person/Person';
-import PersonModel from './Person/Person.model';
+import * as PersonModel from './Person/Person.model';
 
 
 export default class App extends Component {
   state ={
     persons: [
-      {name:"Zoomba", age: 26},
-      {name:"Natali", age: 24},
-      {name:"Rig", age: 36},
-      {name:"Mir", age: 29},
+      {id: 9, name:"Zoomba", age: 26},
+      {id: 2, name:"Natali", age: 24},
+      {id: 8, name:"Rig", age: 36},
+      {id: 19, name:"Mir", age: 29},
     ]
   }
 
@@ -23,14 +23,31 @@ export default class App extends Component {
     console.log(this.state.persons)
   }
 
+  changeName = (id?:number, event?: any) =>{
+    if(id && event && event.target) {
+      let ind = this.state.persons.findIndex(el=>el.id === id);
+      let _personsState = [...this.state.persons];
+      _personsState[ind].name = event.target.value;
+      this.setState({
+        persons: _personsState
+      })
+    }
+  }
+
   render() {
     return (
       <div className="App">
-      <button onClick={this.switchName.bind(this, '')}>Click</button> 
+      <button onClick={this.switchName.bind(this, 'newOne')}>Click</button> 
       {
         Array.isArray(this.state.persons) &&
-            this.state.persons.map((_person: PersonModel,inx) => (
-              <Person name={_person.name} age={_person.age} key={inx} goPerson={this.switchName.bind(this, 'Riggardo')}></Person>
+            this.state.persons.map((_person: PersonModel.PersonState,inx) => (
+              <Person 
+                id={_person.id}
+                name={_person.name}
+                age={_person.age} key={inx} 
+                goPerson={this.switchName.bind(this, 'Riggardo')}
+                changed={this.changeName}
+              ></Person>
             ))
       }
 {/* 
