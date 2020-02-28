@@ -17,7 +17,7 @@
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "yarn css & react-scripts start",
+    "start": "cls & yarn css & react-scripts start",
     "build": "yarn css & react-scripts build",
     "css": "bundle-scss --config",
     "test": "react-scripts test",
@@ -44,6 +44,10 @@
   "bundleStyle": {
     "dest": "./public/themes.css",
     "mask": "./src/**/*.scss",
-    "sort": ["first-priority", "second-priority", "mixin"]
+    "sort": [
+      "first-priority",
+      "second-priority",
+      "mixin"
+    ]
   }
 }
