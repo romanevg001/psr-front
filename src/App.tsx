@@ -1,17 +1,25 @@
-import React, {Component, SyntheticEvent} from 'react';
-import Person from './Person/Person';
-import * as PersonModel from './Person/Person.model';
+import React, {Component} from 'react';
+import Persons from './components/Persons/Persons';
+import  CreateState from './CreateState';
+
 
 
 export default class App extends Component {
-  state ={
+  constructor(props: any) {
+    super(props);
+    console.log('[App.js] constructor');
+  } 
+
+  state = {
     persons: [
       {id: 9, name:"Zoomba", age: 26},
       {id: 2, name:"Natali", age: 24},
       {id: 8, name:"Rig", age: 36},
       {id: 19, name:"Mir", age: 29},
-    ]
-  }
+    ],
+    isListShow: true
+    
+  };
 
   switchName = (newName: string ="Max") =>{
     this.setState({
@@ -34,26 +42,38 @@ export default class App extends Component {
     }
   }
 
+  addPerson = (event: any) => {
+    console.log(event)
+  }
+
+  deletePerson = (inx:number) => {
+    console.log(this)
+    let persons = [...this.state.persons];
+    persons.splice(inx,1);
+    this.setState( {persons: persons} )
+    console.log(this.state.persons)
+
+  }
+
+  toggleList(){
+    this.setState({isListShow: !this.state.isListShow})
+  }
+
   render() {
+
     return (
       <div className="App">
-      <button onClick={this.switchName.bind(this, 'newOne')}>Click</button> 
-      {
-        Array.isArray(this.state.persons) &&
-            this.state.persons.map((_person: PersonModel.PersonState,inx) => (
-              <Person 
-                id={_person.id}
-                name={_person.name}
-                age={_person.age} key={inx} 
-                goPerson={this.switchName.bind(this, 'Riggardo')}
-                changed={this.changeName}
-              ></Person>
-            ))
-      }
-{/* 
-        <Person name="Zoomba" age="26" goPerson={this.switchName.bind(this, 'Zoombiba')}></Person>
-        <Person name="Rig" age="24" goPerson={this.switchName.bind(this, 'Riggardo')}></Person>
-        <Person name="Natali" age="24" ><i>Content</i></Person> */}
+       <input type="text"  />  <button onClick={this.addPerson}>Add person</button> 
+       <button onClick={this.toggleList.bind(this)}>Toggle List</button> 
+       {
+        (this.state.isListShow) ? Array.isArray(this.state.persons) &&
+          <Persons 
+            persons={this.state.persons}
+            switchName={this.switchName}
+            changeName={this.changeName}
+            deleted={this.deletePerson}
+          ></Persons>   : null
+      } 
       </div>
     );
   }
