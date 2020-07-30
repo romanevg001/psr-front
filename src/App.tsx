@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
+import Person from './components/Persons/Person/Person';
 import Persons from './components/Persons/Persons';
-import  CreateState from './CreateState';
-
+import AddPerson from './components/Persons/AddPerson';
+import { BrowserRouter as Router, Route, Switch,  } from 'react-router-dom';
 
 
 export default class App extends Component {
@@ -9,6 +10,7 @@ export default class App extends Component {
     super(props);
     console.log('[App.js] constructor');
   } 
+  newName='';
 
   state = {
     persons: [
@@ -19,7 +21,30 @@ export default class App extends Component {
     ],
     isListShow: true
     
-  };
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+
+  // componentWillMount() {
+  //   console.log('[App.js] componentWillMount');
+
+  // }
+
+  getSnapshotBeforeUpdate(prop: any, state: any) {
+    console.log('[App.js] getSnapshotBeforeUpdate', prop, state);
+    return state;
+  }
+
+  shouldComponentUpdate() {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+  }
 
   switchName = (newName: string ="Max") =>{
     this.setState({
@@ -31,7 +56,9 @@ export default class App extends Component {
     console.log(this.state.persons)
   }
 
-  changeName = (id?:number, event?: any) =>{
+  changeName = ( event?: any, id?:number,) =>{
+    console.log(id, event.target.value)
+
     if(id && event && event.target) {
       let ind = this.state.persons.findIndex(el=>el.id === id);
       let _personsState = [...this.state.persons];
@@ -43,16 +70,15 @@ export default class App extends Component {
   }
 
   addPerson = (event: any) => {
-    console.log(event)
+    this.setState({persons: [...this.state.persons,{
+      id: Math.random()*100, name:this.newName , age: 24
+    }]})
   }
 
   deletePerson = (inx:number) => {
-    console.log(this)
     let persons = [...this.state.persons];
     persons.splice(inx,1);
     this.setState( {persons: persons} )
-    console.log(this.state.persons)
-
   }
 
   toggleList(){
@@ -60,10 +86,23 @@ export default class App extends Component {
   }
 
   render() {
+    console.log('[App.js] render');
 
     return (
       <div className="App">
-       <input type="text"  />  <button onClick={this.addPerson}>Add person</button> 
+
+        <Router>
+          <Switch>
+            <Route path="/person/:id" component={Person} />
+            <Route path="/history" component={AddPerson} />
+          </Switch>
+        </Router>
+        
+    
+
+        <AddPerson 
+          addPerson={this.addPerson}
+        ></AddPerson>
        <button onClick={this.toggleList.bind(this)}>Toggle List</button> 
        {
         (this.state.isListShow) ? Array.isArray(this.state.persons) &&
