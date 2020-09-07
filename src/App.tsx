@@ -3,6 +3,7 @@ import Person from './components/Persons/Person/Person';
 import Persons from './components/Persons/Persons';
 import AddPerson from './components/Persons/AddPerson';
 import WithClass from './hoc/WithClass';
+import WithClass2 from './hoc/WithClass2';
 import { BrowserRouter as Router, Route, Switch,  } from 'react-router-dom';
 
 
@@ -90,7 +91,7 @@ class App extends Component {
     console.log('[App.js] render');
 
     return (
-      <div>
+      <WithClass2>
 
         <Router>
           <Switch>
@@ -113,7 +114,7 @@ class App extends Component {
           ></Persons>   : null
    
       } 
-      </div>
+      </WithClass2>
     );
   }
 }
