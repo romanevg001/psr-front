@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import Person from './components/Persons/Person/Person';
 import Persons from './components/Persons/Persons';
 import AddPerson from './components/Persons/AddPerson';
+import WithClass from './hoc/WithClass';
 import { BrowserRouter as Router, Route, Switch,  } from 'react-router-dom';
 
 
-export default class App extends Component {
+class App extends Component {
   constructor(props: any) {
     super(props);
     console.log('[App.js] constructor');
@@ -89,7 +90,7 @@ export default class App extends Component {
     console.log('[App.js] render');
 
     return (
-      <div className="App">
+      <div>
 
         <Router>
           <Switch>
@@ -97,8 +98,6 @@ export default class App extends Component {
             <Route path="/history" component={AddPerson} />
           </Switch>
         </Router>
-        
-    
 
         <AddPerson 
           addPerson={this.addPerson}
@@ -112,9 +111,11 @@ export default class App extends Component {
             changeName={this.changeName}
             deleted={this.deletePerson}
           ></Persons>   : null
+   
       } 
       </div>
     );
   }
 }
 
+export default WithClass(App, "App")
