@@ -7,8 +7,9 @@ export default class Person extends Component<PersonModel.PersonComponent>  {
   render() {
     return (
       <div >
-       gg
-       {this.props.id} 
+       {this.props.id} - {this.props.name} - {this.props.age} __
+        <sup onClick={this.props.changed}><i>change</i></sup> __ 
+        <sup onClick={this.props.delPerson}><i>delete</i></sup>
       </div>
     )
   }

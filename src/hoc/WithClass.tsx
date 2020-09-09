@@ -5,7 +5,7 @@ import React from 'react';
     return (props: any) => (
       <div className={className}>
           <p>вава</p>
-        <WrappedComponent/>
+        <WrappedComponent {...props} />
       </div>
     )
 }

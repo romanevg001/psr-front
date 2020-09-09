@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Person from './components/Persons/Person/Person';
 import Persons from './components/Persons/Persons';
 import AddPerson from './components/Persons/AddPerson';
+import {AppState} from './components/Persons/Person/Person.model';
 import WithClass from './hoc/WithClass';
 import WithClass2 from './hoc/WithClass2';
 import { BrowserRouter as Router, Route, Switch,  } from 'react-router-dom';
@@ -14,7 +15,7 @@ class App extends Component {
   } 
   newName='';
 
-  state = {
+  state:AppState = {
     persons: [
       {id: 9, name:"Zoomba", age: 26},
       {id: 2, name:"Natali", age: 24},
@@ -49,12 +50,12 @@ class App extends Component {
   }
 
   switchName = (newName: string ="Max") =>{
-    this.setState({
+    this.setState((prevState:AppState, props) => ({
       persons: [
-        ...this.state.persons,
+        ...prevState.persons,
         {name:newName, age: 29},
       ]
-    })
+    }));
     console.log(this.state.persons)
   }
 
@@ -91,7 +92,7 @@ class App extends Component {
     console.log('[App.js] render');
 
     return (
-      <WithClass2>
+      <WithClass2 classes="bom">
 
         <Router>
           <Switch>

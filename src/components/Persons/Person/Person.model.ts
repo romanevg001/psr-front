@@ -30,3 +30,22 @@ export interface AddPersonComponent {
   addPerson(event: any): void;
 }
 
+export interface EditPersonComponent {
+  editPerson(event: any): void;
+  editablePerson: Person;
+}
+
+
+export class Person {
+ id: number = 0;
+ name: string = '';
+ age: number = 0;
+ 
+}
+
+export interface AppState {
+  persons: Person[];
+  isListShow: boolean;
+}
+
+
