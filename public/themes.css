@@ -57,3 +57,11 @@ code {
 .text-blue {
   color: blue;
 }
+
+.person {
+  box-shadow: 1px 1px 7px 1px grey;
+  background-blend-mode: screen;
+  background-color: tan ;
+  width: 50%;
+  margin: auto;
+}

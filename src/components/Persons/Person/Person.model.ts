@@ -46,6 +46,7 @@ export class Person {
 export interface AppState {
   persons: Person[];
   isListShow: boolean;
+  authenficated: boolean;
 }
 
 

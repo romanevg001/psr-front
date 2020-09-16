@@ -5,6 +5,7 @@ import AddPerson from './components/Persons/AddPerson';
 import {AppState} from './components/Persons/Person/Person.model';
 import WithClass from './hoc/WithClass';
 import WithClass2 from './hoc/WithClass2';
+import AuthContext from './context/auth-context';
 import { BrowserRouter as Router, Route, Switch,  } from 'react-router-dom';
 
 
@@ -22,7 +23,8 @@ class App extends Component {
       {id: 8, name:"Rig", age: 36},
       {id: 19, name:"Mir", age: 29},
     ],
-    isListShow: true
+    isListShow: true,
+    authenficated: true
     
   }
 
@@ -88,6 +90,10 @@ class App extends Component {
     this.setState({isListShow: !this.state.isListShow})
   }
 
+  login(){
+
+  }
+
   render() {
     console.log('[App.js] render');
 
@@ -107,12 +113,15 @@ class App extends Component {
        <button onClick={this.toggleList.bind(this)}>Toggle List</button> 
        {
         (this.state.isListShow) ? Array.isArray(this.state.persons) &&
-          <Persons 
+          <AuthContext.Provider value={{
+            authenficated: this.state.authenficated, 
+            login: this.login
+          }}><Persons 
             persons={this.state.persons}
             switchName={this.switchName}
             changeName={this.changeName}
             deleted={this.deletePerson}
-          ></Persons>   : null
+          ></Persons></AuthContext.Provider>  : null
    
       } 
       </WithClass2>

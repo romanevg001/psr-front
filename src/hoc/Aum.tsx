@@ -1,8 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 
 const Aum = (props: any) => {
+  const btnEl = useRef(null)
+
   useEffect(() => {
     console.log('aux class');
+    btnEl!.current!.style!.backgroundColor = 'pink';
   },[])
 //  },[props.test])
 
@@ -10,7 +13,7 @@ const Aum = (props: any) => {
       <div>
 
           {props.children}
-
+          <button ref={btnEl}>test</button>
       </div>
     )
 

@@ -51,28 +51,31 @@ export default class Persons extends Component<PersonModel.PersonsComponent> {
         <Link to='/'>Main</Link>
         <div ref={this.perElRef2}>
           <EditPerson editablePerson={this.state.editablePerson} editPerson={this.editPerson.bind(this)}></EditPerson>
-          {
-            this.props.persons.map((_person: PersonModel.PersonState,inx:number) => (
-                // <div key={_person.id} className={_person.age > 25 ? 'text-red': 'text-blue'}>
-                  
-                // //     <Link to={'/person/'+_person.id}>{_person.name} - {_person.age} ({_person.children})</Link>
-                  
-                // //   <span onClick={() => this.props.deleted(inx) }>delete</span>
-                //   <input type="text" onChange={event => this.props.changeName(event, _person.id)} value={_person.name} />
-                // </div>
-                <Person 
-                  ref={(perEl)=>{this.perElRef = perEl}}
-                  id={_person.id}
-                  name={_person.name}
-                  age={_person.age}
-                  key={_person.id} 
-                  goPerson={() =>this.props.switchName('Riggardo')}
-                  changed={event => this.changeName(_person)}
-                  delPerson={() => this.props.deleted(inx) }
-                />
-              
-            ))
+         { this.props.persons.map((_person: PersonModel.PersonState,inx:number) => (
+                  // <div key={_person.id} className={_person.age > 25 ? 'text-red': 'text-blue'}>
+                    
+                  // //     <Link to={'/person/'+_person.id}>{_person.name} - {_person.age} ({_person.children})</Link>
+                    
+                  // //   <span onClick={() => this.props.deleted(inx) }>delete</span>
+                  //   <input type="text" onChange={event => this.props.changeName(event, _person.id)} value={_person.name} />
+                  // </div>
+
+                
+                    <Person 
+                      ref={(perEl)=>{this.perElRef = perEl}}
+                      id={_person.id}
+                      name={_person.name}
+                      age={_person.age}
+                      key={_person.id} 
+                      goPerson={() =>this.props.switchName('Riggardo')}
+                      changed={event => this.changeName(_person)}
+                      delPerson={() => this.props.deleted(inx) }
+                    />
+                
+                
+              ))
           }
+      
  
       </div>
       ******************************************************
