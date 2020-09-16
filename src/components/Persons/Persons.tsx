@@ -11,9 +11,17 @@ import { BrowserRouter as Router, Route, Switch, Link  } from 'react-router-dom'
 
 export default class Persons extends Component<PersonModel.PersonsComponent> {
   state = {
-    editablePerson: undefined
-  } as {
-    editablePerson: Person | undefined
+    editablePerson: new PersonModel.Person()
+  }
+
+  perElRef: any;
+  perElRef2: any;
+
+  constructor(props: any) {
+    super(props);
+    this.perElRef2 = React.createRef();
+  //  this.perElRef2.current.focus();
+    //this.perElRef2.style="color:red"
   }
   
 
@@ -23,7 +31,7 @@ export default class Persons extends Component<PersonModel.PersonsComponent> {
     //   editablePerson: e?.target?.value ? e.target.value : ''
     //  });
    
-  }
+  } 
 
   changeName(_person: PersonModel.Person){
      this.setState({
@@ -31,13 +39,17 @@ export default class Persons extends Component<PersonModel.PersonsComponent> {
      })
      console.log('changeName =this.editablePerson = ', this.state.editablePerson)
   }
+  componentDidMount(){
+    this.perElRef2.current.focus();
+    this.perElRef2.current.style.backgroundColor="pink"
+  }
 
   render() {
     return (
       <Aum test="persons">
         <Router>
         <Link to='/'>Main</Link>
-        <div>
+        <div ref={this.perElRef2}>
           <EditPerson editablePerson={this.state.editablePerson} editPerson={this.editPerson.bind(this)}></EditPerson>
           {
             this.props.persons.map((_person: PersonModel.PersonState,inx:number) => (
@@ -49,6 +61,7 @@ export default class Persons extends Component<PersonModel.PersonsComponent> {
                 //   <input type="text" onChange={event => this.props.changeName(event, _person.id)} value={_person.name} />
                 // </div>
                 <Person 
+                  ref={(perEl)=>{this.perElRef = perEl}}
                   id={_person.id}
                   name={_person.name}
                   age={_person.age}
@@ -57,8 +70,10 @@ export default class Persons extends Component<PersonModel.PersonsComponent> {
                   changed={event => this.changeName(_person)}
                   delPerson={() => this.props.deleted(inx) }
                 />
+              
             ))
           }
+ 
       </div>
       ******************************************************
           <Switch>
