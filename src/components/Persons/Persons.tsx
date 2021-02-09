@@ -1,15 +1,16 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import Person from './Person/Person';
 import Aum from '../../hoc/Aum';
 //import WithClass from '../../hoc/WithClass';
 import * as PersonModel from './Person/Person.model';
 import EditPerson from './EditPerson';
 import { BrowserRouter as Router, Route, Switch, Link  } from 'react-router-dom';
+import AuthContext from '../../context/auth-context';
 
 
 // export default (this.props:PersonModel.PersonsComponent) => (
 
-export default class Persons extends Component<PersonModel.PersonsComponent> {
+export default class Persons extends PureComponent<PersonModel.PersonsComponent> {
   state = {
     editablePerson: new PersonModel.Person()
   }
@@ -23,6 +24,12 @@ export default class Persons extends Component<PersonModel.PersonsComponent> {
   //  this.perElRef2.current.focus();
     //this.perElRef2.style="color:red"
   }
+
+
+  // shouldComponentUpdate(nextProps: any, nextState: any) {
+  //   console.log('[Persons.js] shouldComponentUpdate', nextProps.persons !== this.props.persons);
+  //   return nextProps.persons !== this.props.persons;
+  // }
   
 
   editPerson(e:any) {
@@ -39,6 +46,9 @@ export default class Persons extends Component<PersonModel.PersonsComponent> {
      })
      console.log('changeName =this.editablePerson = ', this.state.editablePerson)
   }
+
+
+
   componentDidMount(){
     this.perElRef2.current.focus();
     this.perElRef2.current.style.backgroundColor="pink"
@@ -75,6 +85,15 @@ export default class Persons extends Component<PersonModel.PersonsComponent> {
                 
               ))
           }
+
+          <AuthContext.Consumer>
+          {
+            (context) => (
+                <button onClick={context.login}>Login</button>
+            )
+          }
+          </AuthContext.Consumer>
+
       
  
       </div>

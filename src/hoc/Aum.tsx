@@ -6,8 +6,11 @@ const Aum = (props: any) => {
   useEffect(() => {
     console.log('aux class');
     btnEl!.current!.style!.backgroundColor = 'pink';
-  },[])
-//  },[props.test])
+    return () => {
+      console.log('aux class clean up work');
+    }
+  },[]) // work like didMount
+//  },[props.test]) work if test property changed
 
     return  (
       <div>
@@ -20,7 +23,7 @@ const Aum = (props: any) => {
 }
 
 
-export default Aum;
+export default React.memo(Aum);
 
 
 

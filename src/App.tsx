@@ -24,17 +24,30 @@ class App extends Component {
       {id: 19, name:"Mir", age: 29},
     ],
     isListShow: true,
-    authenficated: true
+    authenficated: false
     
   }
 
-  componentDidMount() {
+  static getDerivedStateFromProps(props: any, state: AppState) {
+    console.log('[App.js] getDerivedStateFromProps');
+    return state;
+  }
+
+  componentDidCatch() {
+    console.log('[App.js] componentDidCatch');
+
+  }
+
+  componentDidMount() { // call http
     console.log('[App.js] componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('[App.js] componentWillUnmount');
   }
 
   // componentWillMount() {
   //   console.log('[App.js] componentWillMount');
-
   // }
 
   getSnapshotBeforeUpdate(prop: any, state: any) {
@@ -91,7 +104,7 @@ class App extends Component {
   }
 
   login(){
-
+    this.setState( {authenficated: true} )
   }
 
   render() {
@@ -115,7 +128,7 @@ class App extends Component {
         (this.state.isListShow) ? Array.isArray(this.state.persons) &&
           <AuthContext.Provider value={{
             authenficated: this.state.authenficated, 
-            login: this.login
+            login: this.login.bind(this)
           }}><Persons 
             persons={this.state.persons}
             switchName={this.switchName}
