@@ -18,6 +18,8 @@ export default class Persons extends PureComponent<PersonModel.PersonsComponent>
   perElRef: any;
   perElRef2: any;
 
+  static contextType = AuthContext;
+
   constructor(props: any) {
     super(props);
     this.perElRef2 = React.createRef();
@@ -34,6 +36,7 @@ export default class Persons extends PureComponent<PersonModel.PersonsComponent>
 
   editPerson(e:any) {
     console.log(e.target.value)
+    console.log('authenficated:', this.context.authenficated)
     // this.setState({
     //   editablePerson: e?.target?.value ? e.target.value : ''
     //  });
@@ -57,6 +60,8 @@ export default class Persons extends PureComponent<PersonModel.PersonsComponent>
   render() {
     return (
       <Aum test="persons">
+        <h3>Am I authenficated: {this.context.authenficated ? 'yes' : 'no'} - /{this.context.authenficated}/</h3>
+
         <Router>
         <Link to='/'>Main</Link>
         <div ref={this.perElRef2}>
@@ -85,7 +90,6 @@ export default class Persons extends PureComponent<PersonModel.PersonsComponent>
                 
               ))
           }
-
           <AuthContext.Consumer>
           {
             (context) => (

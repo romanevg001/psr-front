@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import * as PersonModel from './Person/Person.model';
+import React, {Component, Fragment} from 'react';
+import {EditPersonComponent} from './Person/Person.model';
 
 // export default (this.props:PersonModel.PersonsComponent) => (
 
-export default class EditPerson extends Component<PersonModel.EditPersonComponent> {
+export default class EditPerson extends Component<EditPersonComponent> {
  
   // componentDidMount() {
   //   console.log('componentDidMount: ', this.props)
@@ -27,10 +27,12 @@ export default class EditPerson extends Component<PersonModel.EditPersonComponen
   render() {
     console.log('this.props: ', this.props)
     return (
+      <Fragment>
       <form>
         <input type="text" name="text" onChange={this.props.editPerson} value={this.props.editablePerson.name}  />
         {/* <button type="submit" >Edit person</button>  */}
       </form>
+      </Fragment>
     )
     
   }

@@ -1,15 +1,20 @@
 import React, {Component} from 'react';
-import * as PersonModel from './Person.model';
+import {PersonComponent} from './Person.model';
 import AuthContext from '../../../context/auth-context';
 
 
 
-export default class Person extends Component<PersonModel.PersonComponent>  {
+export default class Person extends Component<PersonComponent>  {
 
   static contextType = AuthContext;
+  personEl: any;
+  personElRef = React.createRef<HTMLInputElement>();
+
 
   componentDidMount() {
-    console.log(this.context.authenficated)
+    console.log('PersonComponent componentDidMount',this.context.authenficated)
+    this.personEl.focus();
+    this.personElRef.current.setAttribute('style','border:2px red solid')
   }
 
   render() {
@@ -23,6 +28,8 @@ export default class Person extends Component<PersonModel.PersonComponent>  {
             {this.props.id} - {this.props.name} - {this.props.age} __
             <sup onClick={this.props.changed}><i>change</i></sup> __ 
             <sup onClick={this.props.delPerson}><i>delete</i></sup>
+            <input type="text"  ref={el => this.personEl = el} />
+            <input type="text"  ref={this.personElRef} />
           </div>
         )
       }

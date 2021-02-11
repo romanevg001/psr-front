@@ -3,7 +3,7 @@ import Person from './components/Persons/Person/Person';
 import Persons from './components/Persons/Persons';
 import AddPerson from './components/Persons/AddPerson';
 import {AppState} from './components/Persons/Person/Person.model';
-import WithClass from './hoc/WithClass';
+import withClass from './hoc/withClass';
 import WithClass2 from './hoc/WithClass2';
 import AuthContext from './context/auth-context';
 import { BrowserRouter as Router, Route, Switch,  } from 'react-router-dom';
@@ -48,6 +48,13 @@ class App extends Component {
 
   // componentWillMount() {
   //   console.log('[App.js] componentWillMount');
+// Update state depend on the old state
+  // this.setSate((prevState, props) => {
+  //   return {
+  //      persons: persons,
+  //      personCounter: prevState.personCounter + 1
+  //   }
+  // })
   // }
 
   getSnapshotBeforeUpdate(prop: any, state: any) {
@@ -142,4 +149,4 @@ class App extends Component {
   }
 }
 
-export default WithClass(App, "App")
+export default withClass(App, "App")

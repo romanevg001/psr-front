@@ -1,9 +1,10 @@
 import React, {Component, SyntheticEvent} from 'react';
-import * as PersonModel from './Person/Person.model';
+import {AddPersonComponent} from './Person/Person.model';
+import Wrapper from '../../hoc/Wrapper';
 
 // export default (this.props:PersonModel.PersonsComponent) => (
 
-export default class AddPerson extends Component<PersonModel.AddPersonComponent> {
+export default class AddPerson extends Component<AddPersonComponent> {
   keyUp(e: any) {
     if(e.keyCode === 13) {
       this.props.addPerson(e);
@@ -30,10 +31,13 @@ export default class AddPerson extends Component<PersonModel.AddPersonComponent>
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" name="text" checked={this.isGoing} />
-        <button type="submit" >Add person</button> 
-      </form>
+      <Wrapper>
+        <form onSubmit={this.handleSubmit}>
+          <input type="text" name="text" checked={this.isGoing} />
+          <button type="submit" >Add person</button> 
+        </form>
+        <p>test of wrapper</p>
+      </Wrapper>
     )
     
   }

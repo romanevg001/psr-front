@@ -1,7 +1,7 @@
 import React from 'react';
 
 
- const WithClass = (WrappedComponent: any, className?: any) => {
+ const withClass = (WrappedComponent: any, className?: any) => {
     return (props: any) => (
       <div className={className}>
           <p>вава</p>
@@ -11,7 +11,7 @@ import React from 'react';
 }
 
 
-export default WithClass
+export default withClass
 
 
 
