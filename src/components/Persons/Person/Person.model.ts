@@ -7,7 +7,7 @@ export interface PersonState {
   children?: any;
 }
 
-export interface PersonComponent extends PersonState {
+export interface PersonComponentModel extends PersonState {
   goPerson(): void;
   changed(event: any): void;
   delPerson(): void;
@@ -19,18 +19,18 @@ export interface PersonsState {
 
 }
 
-export interface PersonsComponent extends PersonsState {
+export interface PersonsComponentModel extends PersonsState {
   switchName(name: string): void;
   changeName(event: any, id: number): void;
   deleted(inx: number): void;
 }
 
 
-export interface AddPersonComponent {
+export interface AddPersonComponentModel {
   addPerson(event: any): void;
 }
 
-export interface EditPersonComponent {
+export interface EditPersonComponentModel {
   editPerson(event: any): void;
   editablePerson: Person;
 }

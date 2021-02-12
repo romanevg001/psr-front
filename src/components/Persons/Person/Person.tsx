@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {PersonComponent} from './Person.model';
+import {PersonComponentModel} from './Person.model';
 import AuthContext from '../../../context/auth-context';
 
 
 
-export default class Person extends Component<PersonComponent>  {
+export default class PersonComponent extends Component<PersonComponentModel>  {
 
   static contextType = AuthContext;
   personEl: any;

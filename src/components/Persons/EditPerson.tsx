@@ -1,9 +1,9 @@
 import React, {Component, Fragment} from 'react';
-import {EditPersonComponent} from './Person/Person.model';
+import {EditPersonComponentModel} from './Person/Person.model';
 
 // export default (this.props:PersonModel.PersonsComponent) => (
 
-export default class EditPerson extends Component<EditPersonComponent> {
+export default class EditPersonComponent extends Component<EditPersonComponentModel> {
  
   // componentDidMount() {
   //   console.log('componentDidMount: ', this.props)

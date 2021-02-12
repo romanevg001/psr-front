@@ -1,8 +1,8 @@
 import React, {PureComponent} from 'react';
-import Person from './Person/Person';
+import {PersonComponent} from './Person/Person';
 import Aum from '../../hoc/Aum';
 //import WithClass from '../../hoc/WithClass';
-import * as PersonModel from './Person/Person.model';
+import {PersonsComponentModel, Person, PersonState} from './Person/Person.model';
 import EditPerson from './EditPerson';
 import { BrowserRouter as Router, Route, Switch, Link  } from 'react-router-dom';
 import AuthContext from '../../context/auth-context';
@@ -10,9 +10,9 @@ import AuthContext from '../../context/auth-context';
 
 // export default (this.props:PersonModel.PersonsComponent) => (
 
-export default class Persons extends PureComponent<PersonModel.PersonsComponent> {
+export default class Persons extends PureComponent<PersonsComponentModel> {
   state = {
-    editablePerson: new PersonModel.Person()
+    editablePerson: new Person()
   }
 
   perElRef: any;
@@ -43,7 +43,7 @@ export default class Persons extends PureComponent<PersonModel.PersonsComponent>
    
   } 
 
-  changeName(_person: PersonModel.Person){
+  changeName(_person: Person){
      this.setState({
       editablePerson: _person 
      })
@@ -66,7 +66,7 @@ export default class Persons extends PureComponent<PersonModel.PersonsComponent>
         <Link to='/'>Main</Link>
         <div ref={this.perElRef2}>
           <EditPerson editablePerson={this.state.editablePerson} editPerson={this.editPerson.bind(this)}></EditPerson>
-         { this.props.persons.map((_person: PersonModel.PersonState,inx:number) => (
+         { this.props.persons.map((_person: PersonState,inx:number) => (
                   // <div key={_person.id} className={_person.age > 25 ? 'text-red': 'text-blue'}>
                     
                   // //     <Link to={'/person/'+_person.id}>{_person.name} - {_person.age} ({_person.children})</Link>
@@ -76,7 +76,7 @@ export default class Persons extends PureComponent<PersonModel.PersonsComponent>
                   // </div>
 
                 
-                    <Person 
+                    <PersonComponent 
                       ref={(perEl)=>{this.perElRef = perEl}}
                       id={_person.id}
                       name={_person.name}
@@ -103,8 +103,8 @@ export default class Persons extends PureComponent<PersonModel.PersonsComponent>
       </div>
       ******************************************************
           <Switch>
-          <Route path="/" component={Person} />
-          <Route path="/person/:id" component={Person} />
+          <Route path="/" component={PersonComponent} />
+          <Route path="/person/:id" component={PersonComponent} />
           </Switch>
         </Router>
       </Aum>

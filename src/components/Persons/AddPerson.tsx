@@ -1,10 +1,10 @@
 import React, {Component, SyntheticEvent} from 'react';
-import {AddPersonComponent} from './Person/Person.model';
+import {AddPersonComponentModel} from './Person/Person.model';
 import Wrapper from '../../hoc/Wrapper';
 
 // export default (this.props:PersonModel.PersonsComponent) => (
 
-export default class AddPerson extends Component<AddPersonComponent> {
+export default class AddPersonComponent extends Component<AddPersonComponentModel> {
   keyUp(e: any) {
     if(e.keyCode === 13) {
       this.props.addPerson(e);
